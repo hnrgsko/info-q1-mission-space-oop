@@ -8,10 +8,11 @@ Die Schülerinnen und Schüler arbeiten zunächst modellorientiert über UML und
 
 ## Struktur
 
-- `moodle/` – HTML-Quelltext für den Moodle-Lernpfad Mission 01–13
-- `assets/icons/` – Bilder und Icons für die Moodle-Seiten
+- `moodle/` – vollständige Moodle-Fassung Mission 01–13 für die Einbindung in den Kurs
+- `assets/icons/` – Projektordner für Bilder und Icons; bestehende Space-Icons werden aktuell weiterhin zentral über `https://www.harzenetter.eu/moodle/src/` eingebunden
 - `downloads/mission-01/` bis `downloads/mission-13/` – Lösungen zum Nachvollziehen für den Java-Editor
-- `.github/workflows/` – später: Deployment auf den Webserver
+- `downloads/shared/` – gemeinsam benötigte Dateien wie `SpaceWindow.java`
+- `.github/workflows/` – Deployment auf den Webserver
 
 ## Schülerdownloads
 
@@ -20,13 +21,31 @@ In den Downloadordnern liegen nur Dateien, die die Schülerinnen und Schüler wi
 - `.uml` – UML-Datei zum Öffnen im Java-Editor
 - `.java` – die zugehörigen Java-Quelldateien
 - `README.txt` – kurze Anleitung zum jeweiligen Download
+- `.zip` – das jeweilige Schülerpaket zum einfachen Herunterladen
 
 **Nicht enthalten:** kompilierte `.class`-Dateien oder fertige Builds.
 
 ## Webserver
 
-Die Dateien sollen später zentral unter `https://www.harzenetter.eu/moodle/mission-space/` bereitgestellt und aus Moodle direkt verlinkt werden. Das Deployment wird erst eingerichtet, wenn die Repository-Struktur und die Materialien geprüft sind.
+Die Materialien sind für die Bereitstellung unter
+
+`https://www.harzenetter.eu/moodle/mission-space/`
+
+vorbereitet. Der Workflow `.github/workflows/deploy-netcup.yml` veröffentlicht die Downloadordner und entpackt die aktuelle Moodle-Vollfassung für den Webserver. Das Deployment läuft bewusst nicht automatisch bei jedem Commit, sondern nur manuell oder über ein Versionstag `v*`.
+
+Der Workflow bricht ab, sobald eine `.class`-Datei im Veröffentlichungsstand gefunden wird. Außerdem akzeptiert er aus Sicherheitsgründen nur einen Zielpfad, der auf `.../moodle/mission-space` endet.
+
+## Benötigte GitHub-Secrets
+
+Für den ersten Deploy müssen im Repository beziehungsweise im Environment `production` folgende Secrets hinterlegt sein:
+
+- `NETCUP_SSH_KEY`
+- `NETCUP_SSH_HOST`
+- `NETCUP_SSH_USER`
+- `MISSION_SPACE_DEPLOY_PATH`
+
+`MISSION_SPACE_DEPLOY_PATH` muss auf das Verzeichnis zeigen, das unter `https://www.harzenetter.eu/moodle/mission-space/` erreichbar ist.
 
 ## Wichtig
 
-Dieses Repository ist öffentlich. Zugangsdaten, SSH-Schlüssel und andere Secrets gehören niemals in das Repository, sondern ausschließlich in die GitHub-Secrets des Repositories.
+Dieses Repository ist öffentlich. Zugangsdaten, SSH-Schlüssel und andere Secrets gehören niemals in das Repository, sondern ausschließlich in die GitHub-Secrets.
