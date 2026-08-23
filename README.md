@@ -12,7 +12,6 @@ Die Schülerinnen und Schüler arbeiten zunächst modellorientiert über UML und
 - `assets/icons/` – Projektordner für Bilder und Icons; die bestehenden Space-Icons werden aktuell weiterhin über `https://www.harzenetter.eu/moodle/src/` eingebunden
 - `downloads/mission-01/` bis `downloads/mission-13/` – Lösungen zum Nachvollziehen für den Java-Editor
 - `downloads/shared/` – gemeinsam benötigte Dateien wie `SpaceWindow.java`
-- `.github/workflows/` – Deployment auf den Webserver
 
 ## Schülerdownloads
 
@@ -31,21 +30,14 @@ In den Downloadordnern liegen nur Dateien, die die Schülerinnen und Schüler wi
 
 `https://moodle.harzenetter.eu/mission-space/`
 
-Der Workflow `.github/workflows/deploy-netcup.yml` veröffentlicht die Downloadordner und entpackt zusätzlich die aktuelle Moodle-Vollfassung für den Webserver. Das Deployment läuft bewusst nicht automatisch bei jedem Commit, sondern nur manuell oder über ein Versionstag `v*`.
+Das Repository ist in Plesk/Netcup direkt als Remote-Git-Repository eingebunden. Der Branch `main` wird in den Bereitstellungspfad von Mission Space deployed.
 
-Der Workflow bricht ab, sobald eine `.class`-Datei im Veröffentlichungsstand gefunden wird. Außerdem akzeptiert er aus Sicherheitsgründen nur einen Zielpfad, der auf `.../mission-space` endet. Dadurch kann `rsync --delete` nicht versehentlich den gesamten Dokumentenstamm von `moodle.harzenetter.eu` leeren.
+Ein GitHub-Webhook informiert Plesk bei Änderungen. Dadurch läuft die Aktualisierung automatisch:
 
-## Benötigte GitHub-Secrets
+`Push auf main → Webhook → Plesk Pull → automatische Bereitstellung`
 
-Für den ersten Deploy müssen im Repository beziehungsweise im Environment `production` folgende Secrets hinterlegt sein:
-
-- `NETCUP_SSH_KEY`
-- `NETCUP_SSH_HOST`
-- `NETCUP_SSH_USER`
-- `MISSION_SPACE_DEPLOY_PATH`
-
-`MISSION_SPACE_DEPLOY_PATH` zeigt auf den Unterordner `mission-space` innerhalb des Dokumentenstamms von `moodle.harzenetter.eu`.
+Der Bereitstellungspfad betrifft ausschließlich den Unterordner `mission-space`, sodass andere Inhalte unter `moodle.harzenetter.eu` davon getrennt bleiben.
 
 ## Wichtig
 
-Dieses Repository ist öffentlich. Zugangsdaten, SSH-Schlüssel und andere Secrets gehören niemals in das Repository, sondern ausschließlich in die GitHub-Secrets.
+Zugangsdaten, private SSH-Schlüssel und andere Secrets gehören niemals in dieses Repository. Für ein privates GitHub-Repository erhält Plesk ausschließlich den zum Lesen benötigten Zugriff.
