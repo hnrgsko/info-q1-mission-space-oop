@@ -22,6 +22,8 @@ In den Downloadordnern liegen nur Dateien, die die Schülerinnen und Schüler wi
 - `README.txt` – kurze Anleitung zum jeweiligen Download
 - `.zip` – das jeweilige Schülerpaket zum einfachen Herunterladen
 
+Die UML-Dateien sind im tatsächlich vom Java-Editor verwendeten Diagrammformat gespeichert und enthalten für jede sichtbare Klasse eigene Box-Informationen. `SpaceWindow` bleibt ab Mission 07 bewusst außerhalb des UML-Diagramms, weil die Klasse nur technische Infrastruktur bereitstellt.
+
 **Nicht enthalten:** kompilierte `.class`-Dateien oder fertige Builds.
 
 ## Webserver
