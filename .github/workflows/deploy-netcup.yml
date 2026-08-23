@@ -1,0 +1,91 @@
+name: Mission Space auf Netcup bereitstellen
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mission-space-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v4
+
+      - name: Veröffentlichung vorbereiten
+        run: |
+          set -euo pipefail
+          rm -rf .release
+          mkdir -p .release/moodle
+
+          # Schülerdateien: UML, Java, README und die daraus erstellten ZIP-Dateien.
+          cp -R downloads .release/downloads
+
+          # Die Moodle-Vollfassung liegt als ZIP im Repository und wird für den
+          # Webserver entpackt. Moodle selbst bindet die Downloads anschließend
+          # über feste https-Links ein.
+          unzip -q moodle/Mission_Space_Moodle_Vollfassung_webserver_v2.zip -d .release/moodle
+
+          # Sicherheit: Kompilierte Java-Dateien haben auf dem Schüler-Webspace
+          # nichts zu suchen.
+          if find .release -type f -name '*.class' | grep -q .; then
+            echo 'FEHLER: Es wurden .class-Dateien gefunden. Deployment wird abgebrochen.'
+            find .release -type f -name '*.class' -print
+            exit 1
+          fi
+
+          echo 'Bereitgestellte Dateien:'
+          find .release -maxdepth 3 -type f | sort
+
+      - name: SSH vorbereiten
+        env:
+          NETCUP_SSH_KEY: ${{ secrets.NETCUP_SSH_KEY }}
+          NETCUP_SSH_HOST: ${{ secrets.NETCUP_SSH_HOST }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$NETCUP_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$NETCUP_SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Auf harzenetter.eu übertragen
+        env:
+          NETCUP_SSH_HOST: ${{ secrets.NETCUP_SSH_HOST }}
+          NETCUP_SSH_USER: ${{ secrets.NETCUP_SSH_USER }}
+          MISSION_SPACE_DEPLOY_PATH: ${{ secrets.MISSION_SPACE_DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+
+          # Schutz gegen einen versehentlich zu allgemein gesetzten Zielpfad.
+          case "$MISSION_SPACE_DEPLOY_PATH" in
+            */moodle/mission-space|*/moodle/mission-space/) ;;
+            *)
+              echo 'FEHLER: MISSION_SPACE_DEPLOY_PATH muss auf .../moodle/mission-space zeigen.'
+              exit 1
+              ;;
+          esac
+
+          ssh "$NETCUP_SSH_USER@$NETCUP_SSH_HOST" "mkdir -p '$MISSION_SPACE_DEPLOY_PATH'"
+
+          rsync -az --delete \
+            .release/ \
+            "$NETCUP_SSH_USER@$NETCUP_SSH_HOST:$MISSION_SPACE_DEPLOY_PATH/"
+
+      - name: Öffentliche Downloadpfade prüfen
+        run: |
+          set -euo pipefail
+          BASE='https://www.harzenetter.eu/moodle/mission-space'
+          curl -fsSL --retry 3 --output /dev/null "$BASE/downloads/mission-01/Mission_01_UML_und_Code.zip"
+          curl -fsSL --retry 3 --output /dev/null "$BASE/downloads/mission-13/Mission_13_UML_und_Code.zip"
+          curl -fsSL --retry 3 --output /dev/null "$BASE/downloads/shared/SpaceWindow.java"
+          echo 'Mission Space ist über die vorgesehenen Webserver-Pfade erreichbar.'
