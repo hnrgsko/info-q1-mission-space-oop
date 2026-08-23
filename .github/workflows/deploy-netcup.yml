@@ -31,10 +31,16 @@ jobs:
           # Schülerdateien: UML, Java, README und die daraus erstellten ZIP-Dateien.
           cp -R downloads .release/downloads
 
-          # Die Moodle-Vollfassung liegt als ZIP im Repository und wird für den
-          # Webserver entpackt. Moodle selbst bindet die Downloads anschließend
-          # über feste https-Links ein.
+          # Die Moodle-Vollfassung wird nur als zusätzliche Kopie auf dem Webserver
+          # abgelegt. In Moodle selbst wird ihr HTML-Quelltext eingefügt.
           unzip -q moodle/Mission_Space_Moodle_Vollfassung_webserver_v2.zip -d .release/moodle
+
+          # Die bisherige Fassung verweist noch auf den alten Pfad unter www.
+          # Beim Deployment werden diese Links auf die zentrale Moodle-Subdomain
+          # umgestellt. Die bereits vorhandenen gemeinsamen Icons unter
+          # www.harzenetter.eu/moodle/src/ bleiben vorerst unverändert.
+          find .release/moodle -type f -name '*.html' -print0 | xargs -0 -r sed -i \
+            's#https://www.harzenetter.eu/moodle/mission-space#https://moodle.harzenetter.eu/mission-space#g'
 
           # Sicherheit: Kompilierte Java-Dateien haben auf dem Schüler-Webspace
           # nichts zu suchen.
@@ -58,7 +64,7 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H "$NETCUP_SSH_HOST" >> ~/.ssh/known_hosts
 
-      - name: Auf harzenetter.eu übertragen
+      - name: Auf moodle.harzenetter.eu übertragen
         env:
           NETCUP_SSH_HOST: ${{ secrets.NETCUP_SSH_HOST }}
           NETCUP_SSH_USER: ${{ secrets.NETCUP_SSH_USER }}
@@ -66,11 +72,13 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Schutz gegen einen versehentlich zu allgemein gesetzten Zielpfad.
+          # Der Zielordner ist ausschließlich der Mission-Space-Unterordner
+          # innerhalb des Dokumentenstamms von moodle.harzenetter.eu.
+          # So kann rsync --delete niemals versehentlich die gesamte Subdomain leeren.
           case "$MISSION_SPACE_DEPLOY_PATH" in
-            */moodle/mission-space|*/moodle/mission-space/) ;;
+            */mission-space|*/mission-space/) ;;
             *)
-              echo 'FEHLER: MISSION_SPACE_DEPLOY_PATH muss auf .../moodle/mission-space zeigen.'
+              echo 'FEHLER: MISSION_SPACE_DEPLOY_PATH muss auf den Unterordner .../mission-space zeigen.'
               exit 1
               ;;
           esac
@@ -84,8 +92,8 @@ jobs:
       - name: Öffentliche Downloadpfade prüfen
         run: |
           set -euo pipefail
-          BASE='https://www.harzenetter.eu/moodle/mission-space'
+          BASE='https://moodle.harzenetter.eu/mission-space'
           curl -fsSL --retry 3 --output /dev/null "$BASE/downloads/mission-01/Mission_01_UML_und_Code.zip"
           curl -fsSL --retry 3 --output /dev/null "$BASE/downloads/mission-13/Mission_13_UML_und_Code.zip"
           curl -fsSL --retry 3 --output /dev/null "$BASE/downloads/shared/SpaceWindow.java"
-          echo 'Mission Space ist über die vorgesehenen Webserver-Pfade erreichbar.'
+          echo 'Mission Space ist über moodle.harzenetter.eu erreichbar.'
