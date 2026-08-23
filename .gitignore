@@ -1,0 +1,27 @@
+# Kompilierte Java-Dateien
+*.class
+
+# Typische Build-Ordner
+bin/
+out/
+build/
+target/
+
+# Editor-/Systemdateien
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+
+# Lokale Zugangsdaten und Umgebungsdateien
+.env
+.env.*
+!.env.example
+
+# SSH-Schlüssel niemals versionieren
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
