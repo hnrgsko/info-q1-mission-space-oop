@@ -9,7 +9,7 @@ Die Schülerinnen und Schüler arbeiten zunächst modellorientiert über UML und
 ## Struktur
 
 - `moodle/` – vollständige Moodle-Fassung Mission 01–13 für die Einbindung in den Kurs
-- `assets/icons/` – Projektordner für Bilder und Icons; bestehende Space-Icons werden aktuell weiterhin zentral über `https://www.harzenetter.eu/moodle/src/` eingebunden
+- `assets/icons/` – Projektordner für Bilder und Icons; die bestehenden Space-Icons werden aktuell weiterhin über `https://www.harzenetter.eu/moodle/src/` eingebunden
 - `downloads/mission-01/` bis `downloads/mission-13/` – Lösungen zum Nachvollziehen für den Java-Editor
 - `downloads/shared/` – gemeinsam benötigte Dateien wie `SpaceWindow.java`
 - `.github/workflows/` – Deployment auf den Webserver
@@ -27,13 +27,13 @@ In den Downloadordnern liegen nur Dateien, die die Schülerinnen und Schüler wi
 
 ## Webserver
 
-Die Materialien sind für die Bereitstellung unter
+`moodle.harzenetter.eu` dient als zentraler Dateiserver für ausgelagerte Moodle-Materialien. Mission Space wird darunter in einem eigenen Unterordner bereitgestellt:
 
-`https://www.harzenetter.eu/moodle/mission-space/`
+`https://moodle.harzenetter.eu/mission-space/`
 
-vorbereitet. Der Workflow `.github/workflows/deploy-netcup.yml` veröffentlicht die Downloadordner und entpackt die aktuelle Moodle-Vollfassung für den Webserver. Das Deployment läuft bewusst nicht automatisch bei jedem Commit, sondern nur manuell oder über ein Versionstag `v*`.
+Der Workflow `.github/workflows/deploy-netcup.yml` veröffentlicht die Downloadordner und entpackt zusätzlich die aktuelle Moodle-Vollfassung für den Webserver. Das Deployment läuft bewusst nicht automatisch bei jedem Commit, sondern nur manuell oder über ein Versionstag `v*`.
 
-Der Workflow bricht ab, sobald eine `.class`-Datei im Veröffentlichungsstand gefunden wird. Außerdem akzeptiert er aus Sicherheitsgründen nur einen Zielpfad, der auf `.../moodle/mission-space` endet.
+Der Workflow bricht ab, sobald eine `.class`-Datei im Veröffentlichungsstand gefunden wird. Außerdem akzeptiert er aus Sicherheitsgründen nur einen Zielpfad, der auf `.../mission-space` endet. Dadurch kann `rsync --delete` nicht versehentlich den gesamten Dokumentenstamm von `moodle.harzenetter.eu` leeren.
 
 ## Benötigte GitHub-Secrets
 
@@ -44,7 +44,7 @@ Für den ersten Deploy müssen im Repository beziehungsweise im Environment `pro
 - `NETCUP_SSH_USER`
 - `MISSION_SPACE_DEPLOY_PATH`
 
-`MISSION_SPACE_DEPLOY_PATH` muss auf das Verzeichnis zeigen, das unter `https://www.harzenetter.eu/moodle/mission-space/` erreichbar ist.
+`MISSION_SPACE_DEPLOY_PATH` zeigt auf den Unterordner `mission-space` innerhalb des Dokumentenstamms von `moodle.harzenetter.eu`.
 
 ## Wichtig
 
