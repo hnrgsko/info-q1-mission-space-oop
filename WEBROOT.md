@@ -15,6 +15,12 @@ Die bereits vorhandenen Space-Icons werden vorerst weiterhin über
 
 `https://www.harzenetter.eu/moodle/src/`
 
-eingebunden. Sie können später ebenfalls auf die Moodle-Subdomain umgezogen werden, ohne die Schülerdownloads zu verändern.
+eingebunden.
 
-Auf dem Netcup-Webhosting zeigt `MISSION_SPACE_DEPLOY_PATH` auf den Unterordner `mission-space` innerhalb des Dokumentenstamms von `moodle.harzenetter.eu`.
+## Deployment
+
+Das GitHub-Repository ist direkt in Plesk als Remote-Repository eingebunden. Plesk deployed den Branch `main` in den Unterordner `mission-space` des Dokumentenstamms von `moodle.harzenetter.eu`.
+
+Ein GitHub-Webhook stößt bei einem Push auf `main` automatisch den Pull und die Bereitstellung in Plesk an.
+
+Der frühere GitHub-Actions/SSH-Workflow wird nicht mehr verwendet.
