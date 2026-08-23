@@ -1,8 +1,30 @@
 ﻿[Files]
 File0=Raumschiff.java
+File1=Asteroid.java
+File2=MissionSpace.java
 
 [Box:  - Raumschiff]
 X=50
+Y=40
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - Asteroid]
+X=430
+Y=500
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - MissionSpace]
+X=830
 Y=40
 MinVis=0
 ShowParameter=4

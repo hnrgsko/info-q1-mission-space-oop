@@ -1,14 +1,28 @@
-[Files]
+﻿[Files]
 File0=Raumschiff.java
 
+[Box:  - Raumschiff]
+X=50
+Y=40
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
 [Diagram]
-Comments=0
+comments=0
 OffsetX=0
 OffsetY=0
-ShowParameter=2
+Visibility=0
+ShowParameter=4
 SortOrder=0
-ShowIcons=0
+ShowIcons=1
 ShowConnections=1
-Fontname=Arial
-Fontsize=10
+Fontname=Segoe UI
+Fontsize=12
 ShowObjectDiagram=0
+
+[Interactive]
+I0=
