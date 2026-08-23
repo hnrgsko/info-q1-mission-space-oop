@@ -8,10 +8,10 @@ Die Schülerinnen und Schüler arbeiten zunächst modellorientiert über UML und
 
 ## Struktur
 
-- `moodle/` – vollständige Moodle-Fassung Mission 01–13 für die Einbindung in den Kurs
-- `assets/icons/` – Projektordner für Bilder und Icons; die bestehenden Space-Icons werden aktuell weiterhin über `https://www.harzenetter.eu/moodle/src/` eingebunden
 - `downloads/mission-01/` bis `downloads/mission-13/` – Lösungen zum Nachvollziehen für den Java-Editor
 - `downloads/shared/` – gemeinsam benötigte Dateien wie `SpaceWindow.java`
+- `moodle/` – Hinweise zur aktuellen Moodle-Vollfassung
+- `assets/icons/` – reservierter Projektordner; die bestehenden Space-Icons werden weiterhin zentral über `https://www.harzenetter.eu/moodle/src/` eingebunden
 
 ## Schülerdownloads
 
@@ -30,7 +30,7 @@ In den Downloadordnern liegen nur Dateien, die die Schülerinnen und Schüler wi
 
 `https://moodle.harzenetter.eu/mission-space/`
 
-Das Repository ist in Plesk/Netcup direkt als Remote-Git-Repository eingebunden. Der Branch `main` wird in den Bereitstellungspfad von Mission Space deployed.
+Das Repository ist in Plesk/Netcup direkt als Remote-Git-Repository eingebunden. Der Branch `main` wird nach `mission-space` deployed.
 
 Ein GitHub-Webhook informiert Plesk bei Änderungen. Dadurch läuft die Aktualisierung automatisch:
 
@@ -38,6 +38,12 @@ Ein GitHub-Webhook informiert Plesk bei Änderungen. Dadurch läuft die Aktualis
 
 Der Bereitstellungspfad betrifft ausschließlich den Unterordner `mission-space`, sodass andere Inhalte unter `moodle.harzenetter.eu` davon getrennt bleiben.
 
+## Moodle-Vollfassung
+
+Die Moodle-Vollfassung wird als HTML-Fragment direkt in den Moodle-Editor eingefügt. Ihre Schülerdownloads verweisen auf `https://moodle.harzenetter.eu/mission-space/downloads/...`; die Space-Icons bleiben vorerst unter `https://www.harzenetter.eu/moodle/src/`.
+
+Die alte v2-Webserver-ZIP und der frühere GitHub-Actions/SSH-Deploy wurden entfernt, damit nur noch der tatsächlich verwendete Plesk-Git-Weg dokumentiert ist.
+
 ## Wichtig
 
-Zugangsdaten, private SSH-Schlüssel und andere Secrets gehören niemals in dieses Repository. Für ein privates GitHub-Repository erhält Plesk ausschließlich den zum Lesen benötigten Zugriff.
+Zugangsdaten, private SSH-Schlüssel und andere Secrets gehören niemals in dieses Repository. Für das private GitHub-Repository erhält Plesk ausschließlich den zum Lesen benötigten Zugriff.
