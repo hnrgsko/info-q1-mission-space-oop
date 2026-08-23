@@ -1,15 +1,20 @@
 # Webserver-Struktur
 
-Der Inhalt dieses Repositories soll später unter
+`moodle.harzenetter.eu` wird als zentraler Dateiserver für ausgelagerte Moodle-Materialien verwendet.
 
-`https://www.harzenetter.eu/moodle/mission-space/`
+Mission Space liegt in einem eigenen Unterordner:
 
-erreichbar sein.
+`https://moodle.harzenetter.eu/mission-space/`
 
 Für Moodle sind insbesondere diese Pfade relevant:
 
-- `https://www.harzenetter.eu/moodle/mission-space/assets/icons/...`
-- `https://www.harzenetter.eu/moodle/mission-space/downloads/mission-01/...` bis `mission-13/...`
-- `https://www.harzenetter.eu/moodle/mission-space/downloads/shared/SpaceWindow.java`
+- `https://moodle.harzenetter.eu/mission-space/downloads/mission-01/...` bis `mission-13/...`
+- `https://moodle.harzenetter.eu/mission-space/downloads/shared/SpaceWindow.java`
 
-Das Deployment wird in einem separaten Schritt eingerichtet.
+Die bereits vorhandenen Space-Icons werden vorerst weiterhin über
+
+`https://www.harzenetter.eu/moodle/src/`
+
+eingebunden. Sie können später ebenfalls auf die Moodle-Subdomain umgezogen werden, ohne die Schülerdownloads zu verändern.
+
+Auf dem Netcup-Webhosting zeigt `MISSION_SPACE_DEPLOY_PATH` auf den Unterordner `mission-space` innerhalb des Dokumentenstamms von `moodle.harzenetter.eu`.
