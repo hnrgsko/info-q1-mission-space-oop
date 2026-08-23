@@ -1,5 +1,9 @@
 # Icons und Bilder
 
-Hier liegen die Bilder und Icons, die im Moodle-Lernpfad verwendet werden.
+Dieser Ordner ist für spätere Mission-Space-eigene Bilder und Icons reserviert.
 
-Später werden sie über feste HTTPS-Adressen vom Webserver eingebunden. Die Moodle-Seiten selbst enthalten dadurch keine lokal hochgeladenen Bilddateien.
+Die aktuell verwendeten Space-Icons liegen bereits zentral unter
+
+`https://www.harzenetter.eu/moodle/src/`
+
+und werden von der Moodle-Vollfassung direkt dort eingebunden. Dadurch müssen die vorhandenen Icons nicht doppelt auf `moodle.harzenetter.eu` gespeichert werden.
