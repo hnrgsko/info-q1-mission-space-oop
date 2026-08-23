@@ -1,0 +1,5 @@
+AddDefaultCharset UTF-8
+
+<IfModule mod_mime.c>
+    AddType "text/plain; charset=UTF-8" .md .txt .java .uml
+</IfModule>
