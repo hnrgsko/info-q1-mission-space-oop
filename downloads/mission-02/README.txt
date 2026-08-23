@@ -1,16 +1,16 @@
-Mission 02 – Lösung zum Nachvollziehen
+MISSION 02 – Klasse wird Objekt
 
-Diese Dateien helfen dir, deine Lösung zu überprüfen und nachzuvollziehen.
+Diese Dateien gehören zur „Lösung zum Nachvollziehen“.
 
 So gehst du vor:
-1. Entpacke den Download vollständig in einen eigenen Ordner.
-2. Öffne zuerst die .uml-Datei im Java-Editor.
-3. Vergleiche das UML-Diagramm mit deiner eigenen Lösung.
-4. Erzeuge die Objekte im Java-Editor über die Oberfläche und vergleiche ihren Zustand.
-5. Wenn du wissen möchtest, wie die Klasse im Quellcode aussieht, öffne anschließend die zugehörige .java-Datei.
+1. Entpacke die ZIP-Datei vollständig.
+2. Lass alle Dateien zusammen in einem Ordner.
+3. Öffne im Java-Editor zuerst „Mission_02_Loesung.uml“.
+4. Vergleiche das UML-Diagramm Schritt für Schritt mit deiner eigenen Lösung.
+5. Wenn du wissen möchtest, was der Java-Editor daraus im Quellcode gemacht hat, öffne die zugehörige .java-Datei.
 
-Wichtig: Die im UML-Fenster erzeugten Objekte werden nicht automatisch als Java-Code in die Klassendatei geschrieben. Das greifen wir später noch einmal auf.
+Wichtig: Die Objekte, die du im UML-Fenster interaktiv erzeugst, stehen nicht dauerhaft in Raumschiff.java. Sie existieren nur während der Arbeit im Java-Editor.
 
-Die Dateien sind zum Nachvollziehen gedacht – nicht einfach zum Ersetzen deiner eigenen Arbeit.
+Die Lösung soll dir helfen, deinen eigenen Weg nachzuvollziehen. Versuche deshalb zuerst selbst weiterzukommen und nutze sie dann gezielt zum Vergleichen.
 
-Es sind bewusst keine kompilierten .class-Dateien enthalten.
+In diesem Download sind bewusst keine kompilierten Dateien enthalten.

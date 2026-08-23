@@ -1,13 +1,7 @@
-# Schülerdownloads – Lösungen zum Nachvollziehen
+# Schülerdownloads
 
-Für jede Mission gibt es einen eigenen Ordner.
+Hier liegen die Lösungen zum Nachvollziehen für Mission 01 bis 13.
 
-Die Downloads sind **Hilfen zum Nachvollziehen**, keine fertigen Abgaben. Sie enthalten nur:
+Der eigentliche Moodle-Download ist jeweils die Datei `Mission_XX_UML_und_Code.zip`. Darin liegen die passende `.uml`-Datei, die benötigten `.java`-Quelldateien und eine kurze `README.txt`.
 
-- die passende `.uml`-Datei,
-- die dazugehörigen `.java`-Quelldateien,
-- eine kurze `README.txt`.
-
-Es werden bewusst **keine kompilierten `.class`-Dateien** mitgeliefert.
-
-Die Schülerinnen und Schüler sollen den jeweiligen Ordner vollständig herunterladen bzw. entpacken und anschließend zuerst die `.uml`-Datei im Java-Editor öffnen.
+**Bewusst nicht enthalten:** `.class`-Dateien, Build-Ordner oder Kompilierprotokolle.

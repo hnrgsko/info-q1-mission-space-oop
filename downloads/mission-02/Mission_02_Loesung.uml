@@ -1,0 +1,14 @@
+[Files]
+File0=Raumschiff.java
+
+[Diagram]
+Comments=0
+OffsetX=0
+OffsetY=0
+ShowParameter=2
+SortOrder=0
+ShowIcons=0
+ShowConnections=1
+Fontname=Arial
+Fontsize=10
+ShowObjectDiagram=0

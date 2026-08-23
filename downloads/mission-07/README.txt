@@ -1,15 +1,16 @@
-Mission 07 – Lösung zum Nachvollziehen
+MISSION 07 – First Flight – Fenster
 
-Diese Dateien helfen dir, deine Lösung zu überprüfen und nachzuvollziehen.
+Diese Dateien gehören zur „Lösung zum Nachvollziehen“.
 
 So gehst du vor:
-1. Entpacke den Download vollständig in einen eigenen Ordner.
-2. Öffne zuerst die .uml-Datei im Java-Editor.
-3. Vergleiche die beteiligten Klassen mit deiner eigenen Lösung.
-4. Öffne anschließend die zugehörigen .java-Dateien und schau dir an, wo jetzt konkrete Objekte dauerhaft im Programm erzeugt werden.
+1. Entpacke die ZIP-Datei vollständig.
+2. Lass alle Dateien zusammen in einem Ordner.
+3. Öffne im Java-Editor zuerst „Mission_07_Loesung.uml“.
+4. Vergleiche das UML-Diagramm Schritt für Schritt mit deiner eigenen Lösung.
+5. Wenn du wissen möchtest, was der Java-Editor daraus im Quellcode gemacht hat, öffne die zugehörige .java-Datei.
 
-Wichtig: Hier greifen wir Mission 02 wieder auf. Damals wurden Objekte nur interaktiv im UML-Fenster erzeugt. Jetzt wird die Objekterzeugung erstmals bewusst in einer steuernden Klasse festgehalten.
+Hier wird die Objekterzeugung erstmals dauerhaft in MissionSpace.java festgehalten. Das ist der Schritt von den bisher nur interaktiv erzeugten Objekten zu einem Programm, das seine Objekte selbst erzeugt.
 
-Die Dateien sind zum Nachvollziehen gedacht – nicht einfach zum Ersetzen deiner eigenen Arbeit.
+Die Lösung soll dir helfen, deinen eigenen Weg nachzuvollziehen. Versuche deshalb zuerst selbst weiterzukommen und nutze sie dann gezielt zum Vergleichen.
 
-Es sind bewusst keine kompilierten .class-Dateien enthalten.
+In diesem Download sind bewusst keine kompilierten Dateien enthalten.
